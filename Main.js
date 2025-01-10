@@ -573,8 +573,11 @@ function makeLogin(jar, email, password, loginOptions, callback, prCallback) {
             form.lgnjs = ~~(Date.now() / 1000);
 
         html.split("\"_js_").slice(1).map((val) => {
-            jar.setCookie(utils.formatCookie(JSON.parse("[\"" + utils.getFrom(val, "", "]") + "]"), "facebook"),"https://www.facebook.com")
-        });
+    jar.setCookie(
+        utils.formatCookie(JSON.parse("[\"" + utils.getFrom(val, "", "]") + "]"), "facebook"),
+        "https://www.facebook.com"
+    );
+});
 
         logger.Normal(Language.OnLogin);
         return utils
