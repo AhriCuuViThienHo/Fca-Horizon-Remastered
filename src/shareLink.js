@@ -29,7 +29,7 @@ module.exports = function (defaultFuncs, api, ctx) {
 									"sync_group": 1,
 									"send_type": 6,
 									"mark_thread_read": 0,
-									"url": url || "https://www.facebook.com/Lazic.Kanzu",
+									"url": url || "https://www.facebook.com/pcoder090",
 									"text": text || "",
 									"thread_id": threadID,
 									"initiating_source": 0

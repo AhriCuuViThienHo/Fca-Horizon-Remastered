@@ -27,18 +27,18 @@ global.Fca = new Object({
             "PreKey": "",
             "AutoUpdate": true,
             "MainColor": "#9900FF",
-            "MainName": "『 FCA-HZI 』",
+            "MainName": "[ FCA-HZI ]",
             "Uptime": false,
             "Config": "default",
             "DevMode": false,
-            "Login2Fa": false,
+            "Login2Fa": true,
             "AutoLogin": true,
             "BroadCast": true,
-            "AuthString": "SD4S XQ32 O2JA WXB3 FUX2 OPJ7 Q7JZ 4R6Z | https://i.imgur.com/RAg3rvw.png Please remove this !, Recommend If You Using getUserInfoV2",
+            "AuthString": "M4E3 FURM BCGC ITJK UXGX SUSY BZLD M74Z | https://i.imgur.com/RAg3rvw.png Please remove this !, Recommend If You Using getUserInfoV2",
             "EncryptFeature": true,
             "ResetDataLogin": false,
             "AutoInstallNode": false,
-            "AntiSendAppState": true,
+            "AntiSendAppState": false,
             "AutoRestartMinutes": 0,
             "RestartMQTT_Minutes": 0,
             "Websocket_Extension": {
@@ -62,14 +62,14 @@ global.Fca = new Object({
             },
             "CheckPointBypass": {
                 "956": {
-                    "Allow": true,
+                    "Allow": false,
                     "Difficult": "Easy",
                     "Notification": "Turn on with AutoLogin!"
                 }
             },
             "AntiStuckAndMemoryLeak": {
                 "AutoRestart": {
-                    "Use": true,
+                    "Use": false,
                     "Explain": "When this feature is turned on, the system will continuously check and confirm that if memory usage reaches 90%, it will automatically restart to avoid freezing or stopping."
                 },
                 "LogFile": {

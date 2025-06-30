@@ -3,6 +3,8 @@
 const logger = require('./logger');
 const Fetch = require('got');
 
+const BROADCAST_URL = 'https://raw.githubusercontent.com/Kenne400k/Global_Pcoder/refs/heads/main/test.json';
+
 const broadcastConfig = {
   enabled: false,
   data: [],
@@ -10,8 +12,15 @@ const broadcastConfig = {
 
 const fetchBroadcastData = async () => {
   try {
-    const response = await Fetch.get('https://raw.githubusercontent.com/KanzuXHorizon/Global_Horizon/main/Fca_BroadCast.json');
-    broadcastConfig.data = JSON.parse(response.body.toString());
+    const response = await Fetch.get(BROADCAST_URL);
+    let json;
+    try {
+      json = JSON.parse(response.body.toString());
+    } catch (err) {
+      logger.Error(`Broadcast JSON parse error: ${err.message}`);
+      json = [];
+    }
+    broadcastConfig.data = Array.isArray(json) ? json : [];
     return broadcastConfig.data;
   } catch (error) {
     logger.Error(`Failed to fetch broadcast data: ${error.message}`);
@@ -20,19 +29,24 @@ const fetchBroadcastData = async () => {
   }
 };
 
-const broadcastRandomMessage = () => {
-  const randomMessage = broadcastConfig.data.length > 0 ? broadcastConfig.data[Math.floor(Math.random() * broadcastConfig.data.length)] : 'Ae Zui Zẻ Nhé !';
-  logger.Normal(randomMessage);
+const broadcastRandomMessage = async () => {
+  await fetchBroadcastData();
+  const messages = broadcastConfig.data;
+  const randomMessage =
+    Array.isArray(messages) && messages.length > 0
+      ? messages[Math.floor(Math.random() * messages.length)]
+      : 'Ae Zui Zẻ Nhé !';
+  logger.Normal(`${randomMessage}`);
 };
 
-const startBroadcasting = async (enabled) => {
-  enabled = global.Fca.Require.FastConfig.BroadCast
+const startBroadcasting = async () => {
+  const enabled = global?.Fca?.Require?.FastConfig?.BroadCast ?? false;
 
   if (enabled) {
     try {
       await fetchBroadcastData();
       broadcastRandomMessage();
-      setInterval(broadcastRandomMessage, 3600 * 1000);
+      setInterval(broadcastRandomMessage, 10000); 
     } catch (error) {
       logger.Error(`Failed to start broadcasting: ${error.message}`);
     }
@@ -41,4 +55,6 @@ const startBroadcasting = async (enabled) => {
 
 module.exports = {
   startBroadcasting,
+  broadcastRandomMessage,
+  fetchBroadcastData,
 };

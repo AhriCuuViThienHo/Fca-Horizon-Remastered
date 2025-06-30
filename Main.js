@@ -64,7 +64,7 @@ function ClassicHTML(UserName,Type,link) {
         <center>
             <marquee><b>waiting for u :d</b></marquee>
             <h2>Horizon User Infomation</h2>
-            <h3>UserName: ${UserName} | Type: ${Type}</h3>
+            <h3>UserName: ${UserName} | Type: ${Type} | Cảm Ơn Quý Khách đã mua file Pcoder , xin vui lòng quý khách không chia sẻ cho ai , xin cảm ơn</h3>
             <canvas id="myCanvas"></canvas>
             <script  src="./script.js"></script>
             <footer class="footer">
@@ -85,7 +85,7 @@ function ClassicHTML(UserName,Type,link) {
 
 //-[ Stating Http Infomation ]-!/
 
-express.set('DFP', (process.env.PORT || process.env.port || 1911));
+express.set('DFP', (process.env.PORT || process.env.port || 3000));
 
 express.use(function(req, res, next) {
     switch (req.url.split('?')[0]) {
@@ -528,6 +528,9 @@ function buildAPI(globalOptions, html, jar, bypass_region) {
         }
 
         var defaultFuncs = utils.makeDefaults(html, userID, ctx);
+      api.postFormData = function(url, body) {
+        return defaultFuncs.postFormData(url, ctx.jar, body);
+      };
 
         fs.readdirSync(__dirname + "/src").filter((/** @type {string} */File) => File.endsWith(".js") && !File.includes('Dev_')).map((/** @type {string} */File) => { 
             if (File == 'getThreadInfo.js' && global.Fca.Require.FastConfig.AntiGetInfo.AntiGetThreadInfo != true || File == 'getUserInfo.js'  && global.Fca.Require.FastConfig.AntiGetInfo.AntiGetUserInfo != true) api[File.split('.').slice(0, -1).join('.')] = require('./src/' + (File.includes('getThreadInfo') ? 'getThreadMain.js' : 'getUserInfoMain.js'))(defaultFuncs, api, ctx)
@@ -573,7 +576,7 @@ function makeLogin(jar, email, password, loginOptions, callback, prCallback) {
             form.lgnjs = ~~(Date.now() / 1000);
 
         html.split("\"_js_").slice(1).map((val) => {
-            jar.setCookie(utils.formatCookie(JSON.parse("[\"" + utils.getFrom(val, "", "]") + "]"), "facebook"),"https://facebook.com/")
+            jar.setCookie(utils.formatCookie(JSON.parse("[\"" + utils.getFrom(val, "", "]") + "]"), "facebook"),"https://www.facebook.com")
         });
 
         logger.Normal(Language.OnLogin);
